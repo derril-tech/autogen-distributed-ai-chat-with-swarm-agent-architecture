@@ -45,23 +45,30 @@ Every step of the collaboration is **streamed in real time**, giving you complet
 ### 🎨 **Advanced Conversation UX**
 - **State-Driven UI** — Smooth transitions without page reloads
 - **Dark/Light Mode** — Beautiful theme system with system preference support
-- **Mobile-Optimized** — Responsive design with 44px+ touch targets and mobile navigation
-- **Hero Video Backgrounds** — Immersive landing experience with theme-aware videos
+- **Mobile-Optimized** — Responsive design with 44px+ touch targets, bottom navigation, and hamburger menu
+- **Hero Video Backgrounds** — Immersive landing experience with theme-aware videos (disabled on mobile for performance)
 - **Interactive Analytics** — Dashboard with thread search, statistics, and performance metrics
+- **Toast Notifications** — Beautiful Sonner toasts with perfect centering, thick borders, and smart dismissal logic
+- **Markdown Rendering** — Rich text formatting in all chat messages with theme-aware prose styling
+- **Citation Extraction** — Automatic URL extraction and display from agent responses
 
 ### 📊 **Rich Feature Set**
 | Feature | Description |
 |---------|-------------|
-| 🎯 **Real-Time Streaming** | SSE-based event streaming for live agent updates |
-| 📝 **Thread Management** | Create, list, search, and revisit conversation threads |
-| 📈 **Analytics Dashboard** | Comprehensive statistics and agent performance metrics |
-| 🔍 **Thread Search** | Full-text search across thread titles and content |
-| 📤 **Export Functionality** | Download threads as Markdown or JSON |
-| 📊 **Run Performance Metrics** | Duration, message counts, and agent activity breakdown |
-| 🔄 **Thread Comparison** | Side-by-side comparison of different conversations |
-| 📱 **Mobile Navigation** | Bottom nav and hamburger menu for seamless mobile UX |
-| 🎨 **Theme System** | Complete light/dark mode with smooth transitions |
-| 💾 **Full Persistence** | All conversations saved to Supabase PostgreSQL |
+| 🎯 **Real-Time Streaming** | SSE-based event streaming for live agent updates with toast notifications |
+| 📝 **Thread Management** | Create, list, search, paginate (6 per page), and delete conversation threads |
+| 📈 **Analytics Dashboard** | Comprehensive statistics and agent performance metrics with error handling |
+| 🔍 **Thread Search** | Full-text search across thread titles and content with URL state management |
+| 📤 **Export Functionality** | Download threads as Markdown or JSON from multiple locations |
+| 📊 **Run Performance Metrics** | Real-time duration, message counts, and agent activity breakdown with polling |
+| 🔄 **Thread Comparison** | Side-by-side comparison with dropdown selection, markdown rendering, and export |
+| 📱 **Mobile Navigation** | Bottom nav and hamburger menu with improved contrast and touch targets |
+| 🎨 **Theme System** | Complete light/dark mode with smooth transitions and semantic color tokens |
+| 💾 **Full Persistence** | All conversations saved to Supabase PostgreSQL with automatic title generation |
+| 🔗 **Citation Extraction** | Automatic URL extraction and display from agent responses |
+| 🎨 **Markdown Rendering** | Rich text formatting in all chat messages with code blocks and links |
+| 🔔 **Toast Notifications** | Beautiful, centered toasts with thick borders and smart dismissal |
+| 🗑️ **Delete Functionality** | Permanent thread deletion with beautiful confirmation dialogs |
 
 ---
 
@@ -70,18 +77,21 @@ Every step of the collaboration is **streamed in real time**, giving you complet
 ### **Frontend** ⚛️
 | Technology | Purpose |
 |------------|---------|
-| **Next.js 16.0.10** | React framework with App Router and Server Components |
-| **React 19.2** | Latest React with concurrent features and transitions |
+| **Next.js 16.0.10** | React framework with App Router, Server Components, and Suspense |
+| **React 19.2** | Latest React with concurrent features, transitions, and useTransition |
 | **TypeScript** | Type-safe development with strict mode |
-| **Tailwind CSS** | Utility-first styling with custom design system |
-| **shadcn/ui** | Beautiful, accessible component library |
+| **Tailwind CSS** | Utility-first styling with custom design system and typography plugin |
+| **shadcn/ui** | Beautiful, accessible component library (Button, Card, Dialog, Select, Tabs, Accordion, Sheet) |
+| **Sonner** | Toast notification system with perfect centering and theme support |
+| **react-markdown** | Markdown rendering for chat messages with syntax highlighting |
 | **Server-Sent Events** | Real-time event streaming from backend |
+| **date-fns** | Date formatting and relative time calculations |
 
 ### **Backend** 🐍
 | Technology | Purpose |
 |------------|---------|
 | **FastAPI** | High-performance async Python API framework |
-| **OpenAI GPT-4.1-mini** | Advanced language model for agent responses |
+| **OpenAI GPT-4o-mini** | Advanced language model for agent responses (cost-optimized) |
 | **Pydantic v2** | Data validation and settings management |
 | **Async/Await** | Non-blocking I/O for optimal performance |
 
@@ -165,11 +175,19 @@ Every agent's thought process is visible. You see:
 This transparency builds trust and demonstrates the system's reliability.
 
 ### **Modern Interface**
-- **Hero Section** — Video backgrounds with theme-aware switching
-- **Playground** — Interactive agent panels with real-time updates
-- **Dashboard** — Thread management with search and statistics
-- **Analytics** — Performance metrics and agent insights
-- **Mobile Experience** — Fully optimized with bottom navigation and responsive layouts
+- **Hero Section** — Video backgrounds with theme-aware switching (static on mobile)
+- **Playground** — Interactive agent panels with real-time updates, markdown rendering, and citation display
+  - Input positioned under header with darker borders for visibility
+  - 10-character minimum requirement with real-time feedback
+  - Run Performance metrics with real-time polling
+  - Toast notifications for user feedback at every stage
+- **Dashboard (Runs)** — Thread management with search, pagination (6 per page), and delete functionality
+  - Automatic thread title generation from user messages
+  - Beautiful confirmation dialogs for destructive actions
+  - Export functionality (Markdown/JSON)
+- **Analytics** — Performance metrics and agent insights with robust error handling
+- **Compare** — Side-by-side thread comparison with dropdown selection, markdown rendering, and export
+- **Mobile Experience** — Fully optimized with bottom navigation, hamburger menu, improved contrast, and responsive layouts
 
 ### **Performance**
 - **Sub-2 Second Start** — Streaming begins almost immediately
@@ -201,10 +219,13 @@ This transparency builds trust and demonstrates the system's reliability.
 ### Pro Tips
 
 - **Be Specific** — Clear questions produce better results
-- **Use Multiple Rounds** — Default 2 rounds allow agents to refine their work
+- **Watch Citations** — Agent responses may include source URLs automatically extracted and displayed
+- **Use Pagination** — Navigate through all your threads using the Previous/Next buttons
 - **Explore Threads** — Continue conversations for deeper exploration
 - **Check Analytics** — Monitor agent performance and system metrics
-- **Export Results** — Save important conversations for reference
+- **Export Results** — Save important conversations as Markdown or JSON for reference
+- **Delete Old Threads** — Keep your dashboard clean by deleting threads you no longer need
+- **Read Markdown** — Agent responses support rich formatting including code blocks, links, and headings
 
 ---
 
@@ -223,10 +244,13 @@ This transparency builds trust and demonstrates the system's reliability.
 | Metric | Value |
 |--------|-------|
 | **Streaming Latency** | < 2 seconds to first event |
-| **Average Run Time** | 20-30 seconds (2 rounds) |
-| **Frontend Bundle** | Optimized with Next.js 16 |
-| **Mobile Performance** | 90+ Lighthouse score |
+| **Average Run Time** | 15-25 seconds (1 round for demo, configurable) |
+| **Frontend Bundle** | Optimized with Next.js 16 and code splitting |
+| **Mobile Performance** | 90+ Lighthouse score with video disabled on mobile |
 | **API Response Time** | < 100ms for non-LLM endpoints |
+| **Pagination** | 6 threads per page with efficient offset-based queries |
+| **Citation Extraction** | Automatic URL detection from agent responses |
+| **Toast Notifications** | Sub-second display with smart dismissal logic |
 
 ### Scalability Features
 
@@ -260,10 +284,14 @@ The orchestration of four specialized agents working in harmony demonstrates dee
 
 ### **Transparency & UX**
 Real-time streaming of agent thoughts showcases:
-- Advanced event-driven UI patterns
-- Server-Sent Events (SSE) implementation
-- State management for complex async flows
+- Advanced event-driven UI patterns with toast notifications
+- Server-Sent Events (SSE) implementation with reconnection logic
+- State management for complex async flows with React 19.2 transitions
 - User experience design for AI transparency
+- Markdown rendering for rich text formatting
+- Citation extraction and display for source attribution
+- Beautiful, accessible UI components with shadcn/ui
+- Mobile-first responsive design with optimized touch targets
 
 ### **Modern Full-Stack Architecture**
 The complete system demonstrates:
@@ -275,12 +303,19 @@ The complete system demonstrates:
 
 ### **Production-Ready Features**
 Beyond MVP, the application includes:
-- Analytics dashboard with comprehensive metrics
-- Thread search and filtering
-- Export functionality (Markdown/JSON)
-- Performance monitoring
-- Mobile-optimized UI/UX
-- Theme system with smooth transitions
+- **Analytics Dashboard** — Comprehensive metrics with error handling and data normalization
+- **Thread Search & Pagination** — Full-text search with 6 threads per page navigation
+- **Export Functionality** — Markdown/JSON export from multiple locations (Dashboard, Playground, Compare)
+- **Citation Extraction** — Automatic URL detection and display from agent responses
+- **Markdown Rendering** — Rich text formatting in all chat messages
+- **Toast Notifications** — Beautiful, centered toasts with thick borders and smart dismissal
+- **Delete Functionality** — Permanent thread deletion with beautiful confirmation dialogs
+- **Automatic Titles** — Thread titles generated from first user message
+- **Run Performance Metrics** — Real-time duration, message counts, and agent activity with polling
+- **Performance Monitoring** — Real-time metrics and analytics
+- **Mobile-Optimized UI/UX** — Bottom navigation, hamburger menu, improved contrast, 44px+ touch targets
+- **Theme System** — Complete light/dark mode with smooth transitions and semantic tokens
+- **Error Handling** — Comprehensive error handling with user-friendly messages and graceful degradation
 
 ---
 
@@ -290,19 +325,20 @@ Beyond MVP, the application includes:
 *AI Engineer & Fullstack Developer*
 
 This project demonstrates proficiency in:
-- 🤖 **AI/ML Integration** — Multi-agent orchestration, OpenAI API, prompt engineering
-- ⚛️ **Modern React** — Next.js 16, React 19.2, Server Components, Suspense
-- 🐍 **Python Backend** — FastAPI, async/await, Pydantic, error handling
-- 🎨 **UI/UX Design** — Responsive design, dark/light themes, mobile optimization
-- ☁️ **Cloud Architecture** — Supabase, Redis, Railway, Vercel
-- 📊 **Data Engineering** — PostgreSQL, RPC functions, schema design
-- 🔧 **DevOps** — CI/CD, environment management, production deployment
+- 🤖 **AI/ML Integration** — Multi-agent orchestration, OpenAI API, prompt engineering, citation extraction
+- ⚛️ **Modern React** — Next.js 16, React 19.2, Server Components, Suspense, Transitions, useTransition
+- 🐍 **Python Backend** — FastAPI, async/await, Pydantic, error handling, event loop management
+- 🎨 **UI/UX Design** — Responsive design, dark/light themes, mobile optimization, toast notifications, markdown rendering
+- ☁️ **Cloud Architecture** — Supabase, Redis, Railway, Vercel, CORS configuration, environment management
+- 📊 **Data Engineering** — PostgreSQL, RPC functions, schema design, pagination, full-text search
+- 🔧 **DevOps** — CI/CD, environment management, production deployment, error monitoring
+- 🎯 **Product Polish** — Attention to detail in UI/UX, error handling, user feedback, accessibility
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **[OpenAI](https://openai.com/)** — GPT-4.1-mini API for intelligent agent responses
+- **[OpenAI](https://openai.com/)** — GPT-4o-mini API for intelligent agent responses (62.5% cheaper than GPT-4.1-mini)
 - **[Supabase](https://supabase.com/)** — PostgreSQL database and RPC functions
 - **[Upstash](https://upstash.com/)** — Redis for queuing and event streaming
 - **[Railway](https://railway.app/)** — Backend API deployment
@@ -321,9 +357,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-**⭐ Star this repo if you find it useful!**
-
-[Live Demo](https://autogen-distributed-ai-chat-with-sw.vercel.app/) 
+[Live Demo](https://autogen-distributed-ai-chat-with-sw.vercel.app/) • 
 
 Made with ❤️ and ☕ by [Derril Filemon](https://github.com/derril-tech)
 
