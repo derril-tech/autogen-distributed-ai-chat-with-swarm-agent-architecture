@@ -1,8 +1,6 @@
 # 🧠 SwarmChat
 **Distributed AI Chat with Multi-Agent Architecture**
 
-🌐 **[View Live Application](https://autogen-distributed-ai-chat-with-sw.vercel.app/)**
-
 > **Ask a question once. Watch four specialized AI agents collaborate in real time—then receive a polished, consolidated answer that synthesizes their collective intelligence.** ⚡
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
