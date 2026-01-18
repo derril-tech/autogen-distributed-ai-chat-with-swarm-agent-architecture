@@ -355,8 +355,6 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-[Live Demo](https://autogen-distributed-ai-chat-with-sw.vercel.app/) • 
-
 Made with ❤️ and ☕ by [Derril Filemon](https://github.com/derril-tech)
 
 </div>
